@@ -92,8 +92,8 @@ class StayController extends BaseAPIController
      * @throws Exception
      * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
      */
-    public function generateResidentPaymentReport(GenerateResidentPaymentReportStayRequest $request)
-    {
+    public function generateResidentPaymentReport(GenerateResidentPaymentReportStayRequest $request
+    ): \Illuminate\Http\Response|\Symfony\Component\HttpFoundation\BinaryFileResponse {
         Stay::select(['id', 'check_in', 'check_out', 'total_to_pay'])
             ->whereHas('vehicle', function ($query) {
                 $query->whereHas('vehicleType', function ($query) {

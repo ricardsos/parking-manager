@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -20,7 +19,7 @@ class VehicleTypeSeeder extends Seeder
             'resident' => 2,
             'non-resident' => 3
         ];
-        //$vehicleTypeCostId = 0;
+
         foreach ($names as $name => $id) {
             DB::table('vehicle_types')->insert([
                 'name' => $name,
