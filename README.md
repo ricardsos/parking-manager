@@ -62,3 +62,26 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Requirements
+- **Linux or any OS that supports Docker**
+- **Docker & Docker Compose https://docs.docker.com/engine/install/**
+- **Postman**
+
+## Resources needed
+- **GitHub repository**
+- **Postman collection with endpoints**
+
+## Local Installation
+- **Clone repository via HTTPS: git clone https://github.com/ricardsos/parking-manager.git** 
+- **Enter the folder "parking-manager".**
+- **Make sure the .env file is included in the source files.**
+- **Run the command: docker-compose up -d . Wait for docker to download the necessary images from DockerHub.**
+- **Access the url http://127.0.0.1:8788/ and run migrations with the "Run Migrations" button and refresh the page.**
+- **In the console inside the "parking-manager" folder run the command: docker exec -it parkingmanager-app bash**
+- **Execute the command: php artisan db:seed, to populate our development database.**
+- **Test the backend from Postman with the credentials: 
+    - email: user@test.com 
+    - password: user.pass**
+
+  Note: if when running the command "docker-compose up -d" you get the warning "ports are already used" change ports in the file "docker-compose.yml" and   run the command again.
