@@ -1,0 +1,59 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: pmuser
+                uid: 1000
+            context: ./
+            dockerfile: Dockerfile
+        image: parkingmanager-img
+        container_name: parkingmanager-app
+        restart: unless-stopped
+        working_dir: /var/www/
+        volumes:
+            - ./:/var/www
+        networks:
+            - parkingmanager-nw
+
+    mysql:
+        image: mysql:8.0
+        ports:
+        - ${FORWARD_DB_PORT:-3310}:3306
+        container_name: parkingmanager-mysql
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+#            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+            - parkingmanager_mysql:/var/lib/mysql'
+        networks:
+            - parkingmanager-nw
+#        healthcheck:
+#            test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+#            retries: 3
+#            timeout: 5s
+
+    nginx:
+        image: nginx:1.20-alpine
+        container_name: parkingmanager-nginx
+        restart: unless-stopped
+        ports:
+        - 127.0.0.1:8788:80
+        volumes:
+            - ./:/var/www
+            - ./docker-compose/nginx:/etc/nginx/conf.d
+        networks:
+            - parkingmanager-nw
+networks:
+    parkingmanager-nw:
+        driver: bridge
+
+volumes:
+    parkingmanager_mysql:
+        driver: local
