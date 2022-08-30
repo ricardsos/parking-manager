@@ -80,8 +80,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - **Access the url http://127.0.0.1:8788/ and run migrations with the "Run Migrations" button and refresh the page.**
 - **In the console inside the "parking-manager" folder run the command: docker exec -it parkingmanager-app bash**
 - **Execute the command: php artisan db:seed, to populate our development database.**
-- **Test the backend from Postman with the credentials: 
+- **Test the backend from Postman with the credentials:**
     - email: user@test.com 
-    - password: user.pass**
+    - password: user.pass
 
   Note: if when running the command "docker-compose up -d" you get the warning "ports are already used" change ports in the file "docker-compose.yml" and   run the command again.
